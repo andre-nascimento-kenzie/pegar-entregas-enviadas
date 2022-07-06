@@ -12,7 +12,6 @@ form {
     justify-content: space-between;
     align-items: flex-end;
     max-width: 240px;
-    height: 100px;
 }
 form input {
     outline: none;
@@ -29,4 +28,11 @@ form button {
     border-radius: 8px;
     background-color: #ffffff;
     cursor: pointer;
+}
+.modal-result {
+    width: 200px;
+    min-height: 200px;
+    position: absolute;
+    left: 0;
+    top: 0;
 }

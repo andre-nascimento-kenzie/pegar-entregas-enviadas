@@ -1,5 +1,25 @@
 const script = async () => {
     try {
+        const div = document.createElement("div");
+        const result = document.getElementById(
+            "replacement_notice_mount_point"
+        );
+        result.innerHTML = "";
+        div.style.width = "80%";
+        div.style.height = "200px";
+        div.style.overflowY = "scroll"
+        div.style.border = "2px solid black";
+        div.style.backgroundColor = "#1C1C1C";
+        div.style.color = "#FFFFFF";
+        div.style.position = "absolute";
+        div.style.left = "10%";
+        div.style.top = "0";
+        div.style.zIndex = 5;
+        div.style.padding = "50px"
+        div.style.boxSizing = "border-box"
+        div.style.borderRadius = "10px"
+        div.id = "result-box";
+        result.appendChild(div);
         const $ = {
             get: (url) =>
                 new Promise((resolve, reject) => {
@@ -28,6 +48,7 @@ const script = async () => {
 
                 const anchorTags =
                     document.getElementsByClassName(anchorTagClasses);
+                const resultBox = document.getElementById("result-box");
                 for (let index in anchorTags) {
                     const anchorTag = anchorTags[index];
                     const splitedHrefLink = String(anchorTag["href"]).split(
@@ -40,9 +61,12 @@ const script = async () => {
                         if (
                             !titulo.includes("Extra") &&
                             !titulo.includes("Presença") &&
-                            titulo.includes(`S${sprint}`)
+                            titulo.includes(`S${sprint}`) &&
+                            titulo !== ""
                         ) {
-                            console.log(titulo);
+                            const p = document.createElement("p");
+                            p.innerText = titulo;
+                            resultBox.appendChild(p);
                             jsonLinks.push(
                                 `https://alunos2.kenzie.com.br/courses/${courseId}/gradebook/speed_grader.json?assignment_id=${assignmentId}`
                             );
@@ -83,6 +107,7 @@ const script = async () => {
                 return tabeta.map((list) => list.join(",")).join("\n");
             },
         };
+
         const { courseId } = await chrome.storage.sync.get("courseId");
         const submissions = {};
         let assignments = [];
@@ -101,6 +126,7 @@ const script = async () => {
                 );
             }
         }
+        result.innerHTML = "";
         const csv = $.handleConvertToCsv(submissions);
         const hiddenElement = document.createElement("a");
         hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
