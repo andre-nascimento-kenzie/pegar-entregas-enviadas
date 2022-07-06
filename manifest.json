@@ -1,0 +1,20 @@
+{
+    "name": "Entregas enviadas!",
+    "description": "Obter um arquivo csv com os id's dos envios de cada entrega.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "./js/background.js"
+    },
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "./images/favicon.ico"
+        }
+    }
+}
