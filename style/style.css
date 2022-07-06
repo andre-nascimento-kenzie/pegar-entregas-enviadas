@@ -1,11 +1,11 @@
-*{
+* {
     box-sizing: border-box;
 }
-body{
+body {
     background-color: #3c3c3c;
     color: #ffffff;
 }
-form{
+form {
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -13,20 +13,18 @@ form{
     align-items: flex-end;
     max-width: 240px;
     height: 100px;
-    
 }
-form input{
+form input {
     outline: none;
     height: 32px;
     border-radius: 8px;
     padding-left: 8px;
     text-align: center;
-
 }
-form input::placeholder{
+form input::placeholder {
     text-align: center;
 }
-form button{ 
+form button {
     height: 32px;
     border-radius: 8px;
     background-color: #ffffff;

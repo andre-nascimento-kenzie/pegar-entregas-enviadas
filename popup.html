@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="stylesheet" href="./style/style.css" />
+        <script defer src="./js/services.js"></script>
+        <script defer src="./js/popup.js"></script>
+        <title>Entregas enviadas</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="./style/style.css">
-    <script defer src="./js/services.js"></script>
-    <script defer src="./js/popup.js"></script>
-    <title>Entregas enviadas</title>
-</head>
-
-<body>
-    <form action="#" id="form">
-        <input type="number" placeholder="Id da turma">
-        <button type="submit" id="button">Enviar</button>
-    </form>
-</body>
-
+    <body>
+        <header>
+            <span id="message"></span>
+        </header>
+        <form action="#" id="form">
+            <input type="number" placeholder="Id da turma" required />
+            <button type="submit" id="button">Enviar</button>
+        </form>
+    </body>
 </html>

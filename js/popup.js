@@ -4,7 +4,7 @@ form.addEventListener("submit", async (e) => {
 
     const courseId = parseInt(e.target[0].value);
     const button = document.getElementById("button");
-
+    const message = document.getElementById("message");
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     chrome.storage.sync.set({ courseId });
     chrome.storage.sync.set({ tabId: tab.id });
@@ -13,5 +13,4 @@ form.addEventListener("submit", async (e) => {
         target: { tabId: tab.id },
         function: script,
     });
-    button.setAttribute("disabled", false);
 });
