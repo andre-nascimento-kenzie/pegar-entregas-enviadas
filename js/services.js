@@ -1,50 +1,37 @@
 const script = async () => {
     try {
         const div = document.createElement("div");
-        const result = document.getElementById(
-            "replacement_notice_mount_point"
-        );
-        result.innerHTML = "";
+        const result = document.querySelector("body");
         div.style.width = "80%";
         div.style.height = "200px";
-        div.style.overflowY = "scroll"
+        div.style.overflowY = "scroll";
         div.style.border = "2px solid black";
         div.style.backgroundColor = "#1C1C1C";
         div.style.color = "#FFFFFF";
         div.style.position = "absolute";
         div.style.left = "10%";
         div.style.top = "0";
-        div.style.zIndex = 5;
-        div.style.padding = "50px"
-        div.style.boxSizing = "border-box"
-        div.style.borderRadius = "10px"
+        div.style.zIndex = 10;
+        div.style.padding = "50px";
+        div.style.boxSizing = "border-box";
+        div.style.borderRadius = "10px";
         div.id = "result-box";
         result.appendChild(div);
         const $ = {
             get: (url) =>
-                new Promise((resolve, reject) => {
-                    try {
-                        const httpRequest = new XMLHttpRequest();
-                        httpRequest.open("GET", url, true);
-                        httpRequest.send();
-                        httpRequest.onreadystatechange = function () {
-                            if (httpRequest.readyState === XMLHttpRequest.DONE)
-                                resolve(
-                                    JSON.parse(
-                                        httpRequest.response.replace(
-                                            "while(1);",
-                                            ""
-                                        )
-                                    )
-                                );
-                        };
-                    } catch (error) {
-                        reject(error);
-                    }
-                }),
+                fetch(url, {
+                    method: "GET",
+                    mode: "no-cors",
+                    headers: {
+                        Authorization:
+                            "Bearer KcPYHOOkLOklpLiq3yk1Qrugu5BGIaSMrZD4PlB2SjYyxUVa2K2RBmHuNJ6IDrnM",
+                    },
+                })
+                    .then((res) => res.json())
+                    .then((res) => res),
             handleGetJsonLinks: (courseId, sprint) => {
                 const jsonLinks = [];
-                const anchorTagClasses = "assignment-name";
+                const anchorTagClasses = "fOyUs_bGBk fbyHH_bGBk fbyHH_bSMN";
 
                 const anchorTags =
                     document.getElementsByClassName(anchorTagClasses);
@@ -68,7 +55,7 @@ const script = async () => {
                             p.innerText = titulo;
                             resultBox.appendChild(p);
                             jsonLinks.push(
-                                `https://alunos2.kenzie.com.br/courses/${courseId}/gradebook/speed_grader.json?assignment_id=${assignmentId}`
+                                `https://canvas.kenzie.com.br/courses/${courseId}/gradebook/speed_grader.json?assignment_id=${assignmentId}`
                             );
                         }
                     }
@@ -126,7 +113,7 @@ const script = async () => {
                 );
             }
         }
-        result.innerHTML = "";
+        result.removeChild(div);
         const csv = $.handleConvertToCsv(submissions);
         const hiddenElement = document.createElement("a");
         hiddenElement.href = "data:text/csv;charset=utf-8," + encodeURI(csv);
