@@ -166,8 +166,21 @@ const script = async () => {
             `Entregas_enviadas_${formattedDate}`
         );
         handleDownloadCsv(gradedCsv, `Entregas_corrigidas_${formattedDate}`);
-    } catch (err) {
-        result.removeChild(div);
-        console.log(err);
+    } catch (error) {
+        const button = document.createElement("button");
+        button.innerText = "Fechar";
+        div.innerHTML = `
+            <p>Algo de errado aconteceu!</p>
+            <p>Caso Haja entregas não publicadas visíveis desative em "visualizar".</p>
+            <p>Verifique se está enviando o id correto no campo, ele deve aparecer o mesmo da url.</p>
+            <p>Deixarei o erro retornado abaixo:</p>
+            <span>${error}</span>
+            <br>
+        `;
+        div.appendChild(button);
+
+        button.addEventListener("click", () => {
+            result.removeChild(div);
+        });
     }
 };
